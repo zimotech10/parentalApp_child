@@ -16,7 +16,8 @@ import Series from './components/series.js';
 import Others from './components/others.js';
 import Settings from './components/settings.js';
 import Register from './components/register.js';
-import AppList from './components/displayInstalledAppList.js';
+// import AppList from './components/displayInstalledAppList.js';
+import DashBoard from './components/dashboard.js';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,14 +29,14 @@ export default function App() {
       <NavigationContainer>
           <Stack.Navigator initialRouteName="Login" style={styles.container}>
             <Stack.Screen name="Login" component={LoginScreen} />
-            <Stack.Screen name="Home" component={HomeScreen} />
+            {/* <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="LiveTV" component={LiveTV} />
             <Stack.Screen name="Movies" component={Movies} />
             <Stack.Screen name="Series" component={Series} />
-            <Stack.Screen name="Others" component={Others} />
+            <Stack.Screen name="Others" component={Others} /> */}
             <Stack.Screen name="signup" component={Register} />
-            <Stack.Screen name="Settings" component={Settings} />
-            <Stack.Screen name="installed" component={AppList} />
+            {/* <Stack.Screen name="Settings" component={Settings} /> */}
+            <Stack.Screen name="dashboard" component={DashBoard} />
           </Stack.Navigator>  
          
       </NavigationContainer>

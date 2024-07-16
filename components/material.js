@@ -3,9 +3,8 @@ import { View, StyleSheet, ImageBackground, AsyncStorage } from 'react-native';
 import { Text, TextInput, Button, Snackbar, blue900 } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../store/slices/authSlice';
-import { loginWithoutCridential } from '../store/slices/authSlice';
 import { useNavigation } from '@react-navigation/native';
-import axiosInstance from './axiosInstance';
+
 
 // Retriving cell phone's UUID or unique number
 import DeviceInfo from 'react-native-device-info';
@@ -35,29 +34,10 @@ const LoginScreen = () => {
   useEffect(() => {
     console.log(user.status)
     if (user.status == 200) {
-      navigation.navigate('installed'); // Replace 'Home' with your target route name
+      navigation.navigate('dashboard'); // Replace 'Home' with your target route name
     }else if(user.state == 203){
       setSnackStatus(true);
     }
-
-  //   const fetchDeviceId = async () => {
-  //     try {
-  //       const UUID = await DeviceInfo.getUniqueId();
-  //       // Generate 6-digit short ID using SHA-256 hash
-  //       sha256(UUID)
-  //         .then(hash => {
-  //           const sixDigitId = hash.substring(0, 6).toUpperCase(); // Take the first 6 characters
-  //           setDeviceId(sixDigitId);
-  //         })
-  //         .catch(error => {
-  //           console.error('Error generating SHA-256 hash:', error);
-  //         });
-  //     } catch (error) {
-  //       console.error('Error fetching unique device ID:', error);
-  //     }
-  // };
-    
-    // fetchDeviceId();
 
   }, [authStatus, navigation]);
 
@@ -66,15 +46,7 @@ const LoginScreen = () => {
       <ImageBackground source={require('../assets/aaa.png')} style={styles.backgroundImage}>
         <View style={styles.overlay}>
           <Text style={styles.overlayText} variant="titleLarge">Login</Text>
-          {/* <TextInput
-            style={styles.input}
-            label="Please input provider"
-            value={provider}
-            onChangeText={setProvider}
-            keyboardType="Text"
-            autoCapitalize="none"
-            mode="outlined"
-          /> */}
+
           <TextInput
             style={styles.input}
             label="Please input username or email"

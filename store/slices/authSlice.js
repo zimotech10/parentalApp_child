@@ -7,7 +7,7 @@ import { Alert } from 'react-native';
 const initialState = {
   user: {
     username: '',
-    status: 200
+    status: 0
   },
   status: 'idle',
   error: null,
@@ -15,11 +15,17 @@ const initialState = {
 
 // Define the login async thunk
 export const loginUser = createAsyncThunk('auth/loginUser', async (credentials) => {
-  const response = await axiosInstance.post('/login.php', credentials);
+  const response = await axiosInstance.post('/api/auth', credentials);
   return response.data;
 });
-export const register = createAsyncThunk('auth/register', async ()=> {
-  const response = await axiosInstance.post('/signup',regInfo);
+export const register = createAsyncThunk('auth/register', async (regInfo)=> {
+  console.log(regInfo);
+  const response = await axiosInstance.post('/api/auth',regInfo);
+  console.log("This is server's reply----->",response.data);
+  return response.data;
+});
+export const appsToServer = createAsyncThunk('auth/appsToServer', async (apps)=> {
+  const response = await axiosInstance.post('api/apps',apps);
   return response.data;
 });
 

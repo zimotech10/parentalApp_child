@@ -13,11 +13,12 @@ import {sha256} from 'react-native-sha256';
 
 
 const RegisterScreen = () => {
-  const [username, setUsername] = useState('');
+  const [name, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [password_confirmation, setConfirmPass] = useState('');
   const [email, setEmail] = useState('');
-  const [role, setRole] = useState('child');
-  // const [deviceId, setDeviceId] = useState('');
+  const [parent_email, setParentEmail] = useState('');
+  const [role_id, setRole] = useState(0);
   const [showSnack, setSnackStatus] = useState(false);
 
   const dispatch = useDispatch();
@@ -27,16 +28,15 @@ const RegisterScreen = () => {
   const user = useSelector((state) => state.auth.user);
 
   const handleRegister = () => {
-    dispatch(register({ username, password, email, role }));
+      dispatch(register({ name, email, parent_email, password_confirmation, password, role_id }));
   };
   const toggleSnack = () => {
     setSnackStatus(false);
   };
 
   useEffect(() => {
-    console.log(user.status)
     if (user.status == 200) {
-      navigation.navigate('Home'); // Replace 'Home' with your target route name
+      navigation.navigate('dashboard'); // Replace 'Home' with your target route name
     }else if(user.status == 203){
       setSnackStatus(true);
     }
@@ -51,7 +51,7 @@ const RegisterScreen = () => {
           <TextInput
             style={styles.input}
             label="username"
-            value={username}
+            value={name}
             onChangeText={setUsername}
             keyboardType="Text"
             autoCapitalize="none"
@@ -69,8 +69,8 @@ const RegisterScreen = () => {
           <TextInput
             style={styles.input}
             label="parent email"
-            value={password}
-            onChangeText={setPassword}
+            value={parent_email}
+            onChangeText={setParentEmail}
             keyboardType="email"
             autoCapitalize="none"
             mode="outlined"
@@ -80,6 +80,16 @@ const RegisterScreen = () => {
             label="password"
             value={password}
             onChangeText={setPassword}
+            keyboardType="Text"
+            secureTextEntry
+            autoCapitalize="none"
+            mode="outlined"
+          />
+          <TextInput
+            style={styles.input}
+            label="confirm password"
+            value={password_confirmation}
+            onChangeText={setConfirmPass}
             keyboardType="Text"
             secureTextEntry
             autoCapitalize="none"

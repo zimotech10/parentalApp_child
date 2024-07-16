@@ -7,7 +7,7 @@ import { Alert } from 'react-native';
 const initialState = {
   user: {
     username: '',
-    status: 0
+    status: 201
   },
   status: 'idle',
   error: null,
@@ -20,9 +20,8 @@ export const loginUser = createAsyncThunk('auth/loginUser', async (credentials) 
 });
 export const register = createAsyncThunk('auth/register', async (regInfo)=> {
   console.log(regInfo);
-  const response = await axiosInstance.post('/api/auth',regInfo);
-  console.log("This is server's reply----->",response.data);
-  return response.data;
+  const response = await axiosInstance.post('api/auth/register',regInfo);
+  return response.status;
 });
 export const appsToServer = createAsyncThunk('auth/appsToServer', async (apps)=> {
   const response = await axiosInstance.post('api/apps',apps);

@@ -18,7 +18,7 @@ const RegisterScreen = () => {
   const [password_confirmation, setConfirmPass] = useState('');
   const [email, setEmail] = useState('');
   const [parent_email, setParentEmail] = useState('');
-  const [role_id, setRole] = useState(0);
+  const [role_id, setRole] = useState(2);
   const [showSnack, setSnackStatus] = useState(false);
 
   const dispatch = useDispatch();
@@ -35,7 +35,8 @@ const RegisterScreen = () => {
   };
 
   useEffect(() => {
-    if (user.status == 200) {
+    console.log("oddessa11",user)
+    if (user.status == 201) {
       navigation.navigate('dashboard'); // Replace 'Home' with your target route name
     }else if(user.status == 203){
       setSnackStatus(true);

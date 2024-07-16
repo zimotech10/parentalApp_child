@@ -1,9 +1,11 @@
-import React from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { FlatList, StyleSheet } from 'react-native';
 import { List, useTheme } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { getInstalledApps } from './InstalledAppsModule.js';
 import { appsToServer } from '../store/slices/authSlice.js'
+import { useNavigation } from '@react-navigation/native';
 
 const data = [
   { id: 1, message: 'Logged in successfully', timestamp: '10:00 AM' },
@@ -21,13 +23,13 @@ const DashBoard = () => {
 
 
   useEffect(() => {
-    // if (user.status == 200) {
-    //   navigation.navigate('dashboard'); // Replace 'Home' with your target route name
-    // }else if(user.state == 203){
-    //   setSnackStatus(true);
-    // }
+    if (user.status == 201) {
+      navigation.navigate('dashboard'); // Replace 'Home' with your target route name
+    }else if(user.state == 203){
+      setSnackStatus(true);
+    }
     let apps = getInstalledApps();
-    dispatch(appsToServer({ installedapps, apps }));
+    dispatch(appsToServer({ "installedapps": apps }));
 
 
   }, [authStatus, navigation]);
@@ -57,7 +59,7 @@ const DashBoard = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#221E22', // Background color for the list container
+    backgroundColor: '#FFFFFF', // Background color for the list container
     paddingHorizontal: 16,
     paddingVertical: 12,
   },
